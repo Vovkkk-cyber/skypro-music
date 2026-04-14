@@ -1,9 +1,18 @@
+'use client'
+
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './navigation.module.css';
+import { useState } from 'react';
 
 
 export default function Navigation() {
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+
+  const onOpenBurgerMenu = () => {
+    setIsBurgerMenuOpen(!isBurgerMenuOpen);
+  }
+
   return (
     <nav className={styles.main__nav}>
       <div className={styles.nav__logo}>
@@ -15,41 +24,45 @@ export default function Navigation() {
           alt={'logo'}
         />
       </div>
-      <div className={styles.nav__burger}>
+      <div className={styles.nav__burger}
+        onClick={onOpenBurgerMenu}
+      >
         <span className={styles.burger__line}></span>
         <span className={styles.burger__line}></span>
         <span className={styles.burger__line}></span>
       </div>
-      <div className={styles.nav__menu}>
-        <ul className={styles.menu__list}>
-          <li className={styles.menu__item}>
-            <Link href="#" className={styles.menu__link}>
-              Главное
-            </Link>
-          </li>
-          <li className={styles.menu__item}>
-            <Link href="#" className={styles.menu__link}>
-              Мой плейлист
-            </Link>
-          </li>
-          <li className={styles.menu__item}>
-            <Link href="../signin.html" className={styles.menu__link}>
-              Войти
-            </Link>
-          </li>
-          <li>
-            <div>
-              <Image
-                width={39}
-                height={39}
-                className={styles.theme__image}
-                src="/img/icon/theme-dark.svg"
-                alt={'theme'}
-              />
-            </div>
-          </li>
-        </ul>
-      </div>
+      {isBurgerMenuOpen &&
+        <div className={styles.nav__menu}>
+          <ul className={styles.menu__list}>
+            <li className={styles.menu__item}>
+              <Link href="#" className={styles.menu__link}>
+                Главное
+              </Link>
+            </li>
+            <li className={styles.menu__item}>
+              <Link href="#" className={styles.menu__link}>
+                Мой плейлист
+              </Link>
+            </li>
+            <li className={styles.menu__item}>
+              <Link href="../signin.html" className={styles.menu__link}>
+                Войти
+              </Link>
+            </li>
+            <li>
+              <div>
+                <Image
+                  width={39}
+                  height={39}
+                  className={styles.theme__image}
+                  src="/img/icon/theme-dark.svg"
+                  alt={'theme'}
+                />
+              </div>
+            </li>
+          </ul>
+        </div>
+      }
     </nav>
   )
 }
