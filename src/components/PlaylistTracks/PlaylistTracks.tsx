@@ -1,7 +1,7 @@
 import styles from './playlistTracks.module.css';
 import PlaylistTrack from '../PlaylistTrack/PlaylistTrack';
 import { data } from '@/data';
-import {formatTime} from '@/utils/helpers'
+// import {formatTime} from '@/utils/helpers'
 
 
 export default function PlaylistTracks() {
@@ -10,10 +10,11 @@ export default function PlaylistTracks() {
       {data.map((track) =>
         <PlaylistTrack
           key={track._id}
-          name={track.name}
-          author={track.author}
-          album={track.album}
-          time={formatTime(track.duration_in_seconds)}
+          // name={track.name}
+          // author={track.author}
+          // album={track.album}
+          // time={formatTime(track.duration_in_seconds)}
+          track={track}
         />
       )}
     </div>
