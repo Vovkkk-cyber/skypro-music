@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import styles from './playlistTrack.module.css';
+import styles from './Track.module.css';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { setCurrentTrack, setIsPlay } from '@/store/features/trackSlice';
 import { TrackType } from '@/sharedTypes/sharedTypes';
@@ -17,20 +17,20 @@ type trackTypeProp = {
   track: TrackType
 }
 
-// export default function PlaylistTrack({ name, author, album, time }: trackProp) {
-export default function PlaylistTrack({ track }: trackTypeProp) {
+// export default function Track({ name, author, album, time }: trackProp) {
+export default function Track({ track }: trackTypeProp) {
   const dispatch = useAppDispatch();
 
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
-  // console.log("currentTrack в PlaylistTrack: ", currentTrack);
+  // console.log("currentTrack в Track: ", currentTrack);
 
   const currentTrackId = useAppSelector((state) => state.tracks.currentTrack?._id)
-  // console.log("currentTrackId в PlaylistTrack: ", currentTrackId);
+  // console.log("currentTrackId в Track: ", currentTrackId);
 
   // проверить, что текущий трек играет
   const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
-  // console.log("currentTrackIsPlay в PlaylistTrack: ", currentTrackIsPlay);
+  // console.log("currentTrackIsPlay в Track: ", currentTrackIsPlay);
 
 
   const onClickTrack = () => {

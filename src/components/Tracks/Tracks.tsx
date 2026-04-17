@@ -1,14 +1,14 @@
-import styles from './playlistTracks.module.css';
-import PlaylistTrack from '../PlaylistTrack/PlaylistTrack';
+import styles from './Tracks.module.css';
+import Track from '../Track/Track';
 import { data } from '@/data';
 // import {formatTime} from '@/utils/helpers'
 
 
-export default function PlaylistTracks() {
+export default function Tracks() {
   return (
     <div className={styles.content__playlist}>
       {data.map((track) =>
-        <PlaylistTrack
+        <Track
           key={track._id}
           // name={track.name}
           // author={track.author}

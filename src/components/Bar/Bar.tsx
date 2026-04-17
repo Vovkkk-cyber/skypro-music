@@ -35,20 +35,20 @@ export default function Bar() {
 
 
   const playPauseTrack = () => {
-    if (currentTrackIsPlay === false) {
-      // console.log("Нажали кнопку Play");
-      if (audioRef.current) {
-        audioRef.current.play();
-        dispatch(setIsPlay(true));
-      }
-    } else {
-      // console.log("Нажали кнопку Pause");
-      if (audioRef.current) {
-        audioRef.current.pause();
-        dispatch(setIsPlay(false));
-      }
-    }
+  if (!audioRef.current) {
+    return;
   }
+
+  if (currentTrackIsPlay) {
+    // console.log("Нажали кнопку Pause");
+    audioRef.current.pause();
+    dispatch(setIsPlay(false));
+  } else {
+    // console.log("Нажали кнопку Play");
+    audioRef.current.play();
+    dispatch(setIsPlay(true));
+  }
+}
 
 
   return (
