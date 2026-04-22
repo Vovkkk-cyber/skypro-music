@@ -1,11 +1,63 @@
+'use client';
+
 import Link from 'next/link';
 import styles from './bar.module.css';
 import classnames from 'classnames';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { useRef } from 'react';
+import { setIsPlay } from '@/store/features/trackSlice';
 
 
 export default function Bar() {
+  // получить текущий трек
+  const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
+  // console.log("currentTrack в Bar: ", currentTrack);
+  
+  const currentTrackName = useAppSelector((state) => state.tracks.currentTrack?.name);
+  const currentTrackAuthor = useAppSelector((state) => state.tracks.currentTrack?.author);
+
+  // проверить, что текущий трек играет
+  const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
+  // console.log("currentTrackIsPlay в Bar: ", currentTrackIsPlay);
+
+  const dispatch = useAppDispatch();
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  if (!currentTrack) return <></>;
+
+
+  // eslint-disable-next-line react-hooks/refs
+  if (currentTrack && currentTrackIsPlay && audioRef.current) {
+    // eslint-disable-next-line react-hooks/refs
+    audioRef.current.play();
+  }
+
+
+  const playPauseTrack = () => {
+  if (!audioRef.current) {
+    return;
+  }
+
+  if (currentTrackIsPlay) {
+    // console.log("Нажали кнопку Pause");
+    audioRef.current.pause();
+    dispatch(setIsPlay(false));
+  } else {
+    // console.log("Нажали кнопку Play");
+    audioRef.current.play();
+    dispatch(setIsPlay(true));
+  }
+}
+
+
   return (
     <div className={styles.bar}>
+      <audio className={styles.audio}
+        controls
+        ref={audioRef}
+        src={currentTrack?.track_file}>
+      </audio>
       <div className={styles.bar__content}>
         <div className={styles.bar__playerProgress}></div>
         <div className={styles.bar__playerBlock}>
@@ -16,9 +68,12 @@ export default function Bar() {
                   <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                 </svg>
               </div>
-              <div className={'player__btnPlay btn'}>
+              <div className={classnames(styles.player__btnPlay, styles.btn)}
+                onClick={playPauseTrack}
+              >
                 <svg className={styles.player__btnPlaySvg}>
-                  <use xlinkHref="/img/icon/sprite.svg#icon-play"></use>
+                  <use xlinkHref={
+                    currentTrackIsPlay ? "/img/icon/sprite.svg#icon-pause" : "/img/icon/sprite.svg#icon-play"}></use>
                 </svg>
               </div>
               <div className={styles.player__btnNext}>
@@ -47,12 +102,12 @@ export default function Bar() {
                 </div>
                 <div className={styles.trackPlay__author}>
                   <Link className={styles.trackPlay__authorLink} href="">
-                    Ты та...
+                    {currentTrackName}
                   </Link>
                 </div>
                 <div className={styles.trackPlay__album}>
                   <Link className={styles.trackPlay__albumLink} href="">
-                    Баста
+                    {currentTrackAuthor}
                   </Link>
                 </div>
               </div>
