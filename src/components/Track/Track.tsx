@@ -3,41 +3,44 @@
 import Link from 'next/link';
 import styles from './Track.module.css';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { setCurrentTrack, setIsPlay } from '@/store/features/trackSlice';
+import { setCurrentTrack, setCurrentPlaylist, setIsPlay } from '@/store/features/trackSlice';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { formatTime } from '@/utils/helpers';
 import classNames from 'classnames';
-
 
 type trackTypeProp = {
   // name: string,
   // author: string,
   // album: string,
   // time: string
-  track: TrackType
-}
+  track: TrackType;
+  playlist: TrackType[];
+};
 
 // export default function Track({ name, author, album, time }: trackProp) {
-export default function Track({ track }: trackTypeProp) {
+export default function Track({ track, playlist }: trackTypeProp) {
   const dispatch = useAppDispatch();
 
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
   // console.log("currentTrack в Track: ", currentTrack);
 
-  const currentTrackId = useAppSelector((state) => state.tracks.currentTrack?._id)
+  const currentTrackId = useAppSelector(
+    (state) => state.tracks.currentTrack?._id,
+  );
   // console.log("currentTrackId в Track: ", currentTrackId);
 
   // проверить, что текущий трек играет
   const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
   // console.log("currentTrackIsPlay в Track: ", currentTrackIsPlay);
 
-
   const onClickTrack = () => {
     dispatch(setCurrentTrack(track));
     dispatch(setIsPlay(true));
-  }
+    dispatch(setCurrentPlaylist(playlist));
 
+    // console.log("playlist: ", playlist);
+  }
 
   return (
     <div className={styles.playlist__item}

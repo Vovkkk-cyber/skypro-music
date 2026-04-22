@@ -4,8 +4,8 @@
   overflow: scroll;
   background-color: #181818;
   -ms-overflow-style: none; /* для Internet Explorer, Edge */
-    scrollbar-width: none; /* для Firefox */
-    overflow-y: scroll; /* чтобы оставалась возможность прокрутки */
+  scrollbar-width: none; /* для Firefox */
+  overflow-y: scroll; /* чтобы оставалась возможность прокрутки */
 }
 
 .container {

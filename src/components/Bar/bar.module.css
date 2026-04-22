@@ -1,5 +1,5 @@
 .bar {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -105,6 +105,12 @@
   width: 22px;
   height: 20px;
   fill: #d9d9d9;
+}
+
+.player__btnPrev:hover .player__btnPrevSvg,
+.player__btnPlay:hover .player__btnPlaySvg,
+.player__btnNext:hover .player__btnNextSvg {
+  filter: invert(43%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(93%) contrast(86%);
 }
 
 .player__btnNext {
@@ -289,6 +295,7 @@
   width: 13px;
   height: 18px;
   fill: transparent;
+  cursor: pointer;
 }
 
 .volume__progress {
@@ -336,7 +343,8 @@
 
 .btnIcon:active svg {
   fill: transparent;
-  stroke: #ffffff;
+  /* stroke: #ffffff; */
+  stroke: #ad61ff;
   cursor: pointer;
 }
 
@@ -351,15 +359,44 @@
   &:hover {
     border-color: #d9b6ff;
     color: #d9b6ff;
-    cursor: pointer;
+    /* cursor: pointer; */
   }
+
   &:active {
     border-color: #ad61ff;
     color: #ad61ff;
-    cursor: pointer;
+    /* cursor: pointer; */
   }
 }
 
 .audio {
   display: none;
+}
+
+.btnIcon__active svg {
+  fill: #ad61ff;
+  stroke: #ad61ff;
+  cursor: pointer;
+
+  &:hover {
+    fill: #cd9fff;
+    stroke: #cd9fff;
+    /* cursor: pointer; */
+  }
+}
+
+.trackPlay__timeBlock {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+
+.trackPlay__time {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: right;
+  color: #ffffff;
 }
