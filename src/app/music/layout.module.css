@@ -1,11 +1,8 @@
 .wrapper {
-  width: 100vw;
+  width: 100%;
   min-height: 100%;
-  overflow: scroll;
-  background-color: #181818;
-  -ms-overflow-style: none; /* для Internet Explorer, Edge */
-  scrollbar-width: none; /* для Firefox */
-  overflow-y: scroll; /* чтобы оставалась возможность прокрутки */
+  overflow: hidden;
+  background-color: #383838;
 }
 
 .container {
@@ -14,6 +11,7 @@
   margin: 0 auto;
   position: relative;
   background-color: #181818;
+  color: #fff;
 }
 
 .main {

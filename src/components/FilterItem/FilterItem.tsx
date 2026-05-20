@@ -2,8 +2,9 @@
 
 import classNames from 'classnames';
 import styles from './filterItem.module.css';
-import { data } from '@/data';
+// import { data } from '@/data';
 import { useState } from 'react';
+import { TrackType } from '@/sharedTypes/sharedTypes';
 
 
 type titleItemProp = {
@@ -11,20 +12,22 @@ type titleItemProp = {
   onClick: () => void,
   isOpen: boolean,
   activeFilter: string
+  playlist: TrackType[]
 }
 
-export default function FilterItem({ title, onClick, isOpen, activeFilter }: titleItemProp) {
+export default function FilterItem({ title, onClick, isOpen, activeFilter, playlist }: titleItemProp) {
+  // console.log("playlist в FilterItem: ", playlist);
   // console.log("title в компоненте FilterItem: ", title);
   // console.log("activeFilter в компоненте FilterItem: ", activeFilter);
   // console.log("isOpen в компоненте FilterItem: ", isOpen);
 
-  const uniqueAuthors = [...new Set(data.map(track => track.author))];
+  const uniqueAuthors = [...new Set(playlist.map(track => track.author))];
   // console.log("uniqueAuthors", uniqueAuthors);
 
-  const uniqueReleaseYears = [...new Set(data.map(track => new Date(track.release_date).getFullYear()))];
+  const uniqueReleaseYears = [...new Set(playlist.map(track => new Date(track.release_date).getFullYear()))];
   // console.log("uniqueReleaseYears", uniqueReleaseYears);
 
-  const uniqueGenres = [...new Set(data.flatMap(track => track.genre))];
+  const uniqueGenres = [...new Set(playlist.flatMap(track => track.genre))];
   // console.log("uniqueGenres", uniqueGenres);
 
   // let count: number = 0;

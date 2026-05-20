@@ -1,0 +1,17 @@
+.loading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  /* color: #ffffff; */
+  /* color: #ad61ff; */
+  /* color: #b672ff; */
+  color: #cd9fff;
+}
+.errorContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 18px;
+    color: #fa4f4f;
+}
