@@ -1,12 +1,17 @@
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+
 type initialStateType = {
   currentTrack: null | TrackType,
   isPlay: boolean,
   currentPlaylist: TrackType[],
   isShuffle: boolean,
-  shuffledPlaylist: TrackType[]
+  shuffledPlaylist: TrackType[],
+  allTracks: TrackType[],
+  favoriteTracks: TrackType[],
+  fetchError: null | string,
+  fetchIsLoading: boolean
 }
 
 const initialState: initialStateType = {
@@ -14,8 +19,13 @@ const initialState: initialStateType = {
   isPlay: false,
   currentPlaylist: [],
   isShuffle: false,
-  shuffledPlaylist: []
+  shuffledPlaylist: [],
+  allTracks: [],
+  favoriteTracks: [],
+  fetchError: null,
+  fetchIsLoading: true
 }
+
 
 const trackSlice = createSlice({
   name: 'tracks',
@@ -68,10 +78,33 @@ const trackSlice = createSlice({
     },
     toggleIsShuffle: (state) => {
       state.isShuffle = !state.isShuffle;
+    },
+    setAllTracks: (state, action: PayloadAction<TrackType[]>) => {
+      state.allTracks = action.payload;
+    },
+    setFavoriteTracks: (state, action: PayloadAction<TrackType[]>) => {
+      state.favoriteTracks = action.payload;
+    },
+    addLikedTracks: (state, action: PayloadAction<TrackType>) => {
+      state.favoriteTracks = [...state.favoriteTracks, action.payload];
+      // console.log("Добавили трек в избранное");
+      localStorage.setItem("favoriteTracks", JSON.stringify(state.favoriteTracks));
+    },
+    removeLikedTracks: (state, action: PayloadAction<TrackType>) => {
+      // console.log("Удаляем из избранного трек:", action.payload._id);
+      state.favoriteTracks = state.favoriteTracks.filter((track) => track._id !== action.payload._id);
+      // console.log("Удалили трек из избранного");
+      localStorage.setItem("favoriteTracks", JSON.stringify(state.favoriteTracks));
+    },
+    setFetchError: (state, action: PayloadAction<string>) => {
+      state.fetchError = action.payload;
+    },
+    setFetchIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.fetchIsLoading = action.payload;
     }
   }
 })
 
 
-export const { setCurrentTrack, setCurrentPlaylist, setIsPlay, setNextTrack, setPrevTrack, toggleIsShuffle } = trackSlice.actions;
+export const { setCurrentTrack, setCurrentPlaylist, setIsPlay, setNextTrack, setPrevTrack, toggleIsShuffle, setAllTracks, setFavoriteTracks, addLikedTracks, removeLikedTracks, setFetchError, setFetchIsLoading } = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;

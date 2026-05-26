@@ -36,53 +36,35 @@ export const getFavoriteTracks = async (access: string): Promise<FavoriteType> =
   }
 }
 
-export const addTrackToFavorite = async (trackId: number, accessToken: string) => {
+export const addTrackToFavorite = async (accessToken: string, trackId: number) => {
   try {
     const resp = await axios.post(BASE_URL + `/catalog/track/${trackId}/favorite/`, {}, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       }
     });
+    // console.log("Лайкнули трек");
     // console.log("resp в addTrackToFavorite: ", resp.data);
     return resp.data;
+    // return resp;
   } catch (error) {
     console.error("Ошибка при добавлении трека в избранное: ", error);
     throw error;
   }
 }
 
-export const deleteTrackFromFavorite = async (trackId: number, accessToken: string) => {
+export const deleteTrackFromFavorite = async (accessToken: string, trackId: number) => {
   try {
     const resp = await axios.delete(BASE_URL + `/catalog/track/${trackId}/favorite/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       }
     });
+    // console.log("Сняли лайк с трека трек");
     // console.log("resp в deleteTrackFromFavorite: ", resp.data);
     return resp.data;
   } catch (error) {
     console.error("Ошибка при удалении трека из избранного: ", error);
-    throw error;
-  }
-}
-
-export const refreshAccessToken = async (userRefreshToken: string): Promise<string> => {
-  try {
-    const resp = await axios.post(BASE_URL + '/user/token/refresh/',
-      { refresh: userRefreshToken },
-      {
-        headers: {
-          "content-type": "application/json",
-        }
-      }
-    )
-
-    // console.log("Результат обновления токена: ", resp);
-    // console.log("Новый access token: ", resp.data.access);
-
-    return resp.data.access
-  } catch (error) {
-    console.error("Ошибка при обновлении токена: ", error);
     throw error;
   }
 }
