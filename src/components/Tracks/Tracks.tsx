@@ -3,6 +3,7 @@ import Track from '../Track/Track';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import Loading from '../Loading/Loading';
 import { useAppSelector } from '@/store/store';
+import { useEffect, useState } from 'react';
 
 type PlaylistTracksProp = {
   // name: string,
@@ -31,13 +32,12 @@ export default function Tracks({ playlist, isLoading, error, isAuthRequired }: P
             isLoading ?
               <Loading />
               :
+              !playlist.length ?
+                <div className={styles.messageContainer}>Треки не найдены</div>
+                :
         playlist.map((track) =>
         <Track
           key={track._id}
-            // name={track.name}
-            // author={track.author}
-            // album={track.album}
-            // time={formatTime(track.duration_in_seconds)}
             track={track}
             playlist={playlist}
           />

@@ -5,7 +5,7 @@ import styles from './layout.module.css';
 import Bar from "@/components/Bar/Bar";
 import Navigation from "@/components/Navigation/Navigation";
 import Sidebar from "@/components/Sidebar/Sidebar";
-import FetchingTracks from "@/components/FetchingTracks copy/FetchingTracks";
+import FetchingTracks from "@/components/FetchingTracks/FetchingTracks";
 import { useInitAuth } from "@/hooks/useInitAuth";
 
 

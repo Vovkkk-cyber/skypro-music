@@ -88,9 +88,6 @@ export const refreshAccessToken = async (userRefreshToken: string): Promise<stri
         }
       }
     )
-    // console.log("Результат обновления токена: ", resp);
-    // console.log("Новый access token: ", resp.data.access);
-
     return resp.data.access
   } catch (error) {
     console.error("Ошибка при обновлении токена: ", error);

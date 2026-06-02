@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { clearUser } from '@/store/features/authSlice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useRouter } from 'next/navigation';
+
 
 export default function Navigation() {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ export default function Navigation() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     if (!isAccessToken) {
@@ -34,21 +36,25 @@ export default function Navigation() {
   };
 
   const goToMain = () => {
-    router.push('/music/main');
+    router.push("/music/main");
   };
 
   const logout = () => {
     dispatch(clearUser());
-    router.push('/auth/signin');
+    router.push("/auth/signin");
   };
 
   const login = () => {
-    router.push('/auth/signin');
+    router.push("/auth/signin");
   };
+
 
   return (
     <nav className={styles.main__nav}>
-      <div className={styles.nav__logo} onClick={goToMain}>
+      <div
+        className={styles.nav__logo}
+        onClick={goToMain}
+      >
         <Image
           width={250}
           height={170}
@@ -57,12 +63,14 @@ export default function Navigation() {
           alt={'logo'}
         />
       </div>
-      <div className={styles.nav__burger} onClick={onOpenBurgerMenu}>
+      <div className={styles.nav__burger}
+        onClick={onOpenBurgerMenu}
+      >
         <span className={styles.burger__line}></span>
         <span className={styles.burger__line}></span>
         <span className={styles.burger__line}></span>
       </div>
-      {isBurgerMenuOpen && (
+      {isBurgerMenuOpen &&
         <div className={styles.nav__menu}>
           <ul className={styles.menu__list}>
             <li className={styles.menu__item}>
@@ -76,15 +84,21 @@ export default function Navigation() {
               </Link>
             </li>
             <li className={styles.menu__item}>
-              {isAuth ? (
-                <p className={styles.menu__link} onClick={logout}>
+              {isAuth ?
+                <p
+                  className={styles.menu__link}
+                  onClick={logout}
+                >
                   Выйти
                 </p>
-              ) : (
-                <p className={styles.menu__link} onClick={login}>
+                :
+                <p
+                  className={styles.menu__link}
+                  onClick={login}
+                >
                   Войти
                 </p>
-              )}
+              }
             </li>
             <li>
               <div>
@@ -99,7 +113,7 @@ export default function Navigation() {
             </li>
           </ul>
         </div>
-      )}
+      }
     </nav>
-  );
+  )
 }

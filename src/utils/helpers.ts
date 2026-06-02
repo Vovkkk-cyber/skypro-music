@@ -32,6 +32,10 @@ export function getUniqueValuesByKey(
 }
 
 export function formatTime(time: number) {
+  if (time < 0) {
+    return `0:00`;
+  }
+
   const minutes = Math.floor(time / 60);
   const inputSeconds = Math.floor(time % 60);
   const outputSeconds = inputSeconds < 10 ? `0${inputSeconds}` : `${inputSeconds}`;
@@ -43,25 +47,42 @@ export const getTimePanel = (
   currentTime: number,
   totalTime: number | undefined
 ) => {
+  if (totalTime === 0) {
+    return `${formatTime(currentTime)} / ${formatTime(totalTime)}`
+  };
+
   if (totalTime) {
     return `${formatTime(currentTime)} / ${formatTime(totalTime)}`
   }
 }
 
-export const checkAccessToken = ():boolean => {
-  // время жизни access токена в секундах
-  const tokenLifetime = 200;
+// export function sortByReleaseDateAsc(arr: TrackType[]): TrackType[] {
+//   return [...arr].sort((a, b) => {
+//     return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
+//   })
+// }
 
-  const tokenGetTime = parseInt(localStorage.getItem("tokenGetTime") || "0", 10);
-  // console.log("Время получения токена из LS в проверке токена: ", tokenGetTime);
+// export function sortByReleaseDateDesc(arr: TrackType[]): TrackType[] {
+//   return [...arr].sort((a, b) => {
+//     return new Date(a.release_date).getTime() - new Date(b.release_date).getTime();
+//   })
+// }
 
-  // текущее время в секундах
-  const currentTime = new Date().getTime() / 1000;
-  // console.log("время получения токена в секундах: ", tokenGetTime);
+export function sortByReleaseDate(arr: TrackType[], type: string): TrackType[] {
+  if (type === 'Сначала новые') {
+    arr = [...arr].sort((a, b) => {
+      return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
+    });
+  } else if (type === 'Сначала старые') {
+    arr = [...arr].sort((a, b) => {
+      return new Date(a.release_date).getTime() - new Date(b.release_date).getTime();
+    });
+  } else if (type === 'По умолчанию') {
+    return arr;
+  };
+  return arr;
+};
 
-  const isAccessTokenExpired = Math.round(currentTime - tokenGetTime) >= tokenLifetime;
-  // console.log("Разница времени получения токена и текущего времени в секундах в проверке токена: ", Math.round(currentTime - tokenGetTime));
-  // console.log("Access токен истёк? в проверке токена: ", isAccessTokenExpired);
-
-  return isAccessTokenExpired;
+export function searchTracks(data: string, arr: TrackType[]): TrackType[] {
+  return arr.filter((track) => track.name.toLowerCase().includes(data.toLowerCase()));
 }

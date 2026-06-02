@@ -4,17 +4,25 @@ import classNames from 'classnames';
 import styles from './filterItem.module.css';
 import { useState } from 'react';
 import { TrackType } from '@/sharedTypes/sharedTypes';
+import { useAppSelector } from '@/store/store';
 
 
 type titleItemProp = {
   title: string,
   onClick: () => void,
   isOpen: boolean,
-  activeFilter: string
-  playlist: TrackType[]
+  activeFilter: string,
+  playlist: TrackType[],
+  filterName: string,
+  list: string[],
+  onSelect: (value: string) => void,
 }
 
-export default function FilterItem({ title, onClick, isOpen, activeFilter, playlist }: titleItemProp) {
+export default function FilterItem({ title, onClick, isOpen, activeFilter, playlist, filterName, list, onSelect }: titleItemProp) {
+
+  const selectedAuthor = useAppSelector((state) => state.tracks.filters.authors)
+  const selectedYear = useAppSelector((state) => state.tracks.filters.years)
+  const selectedGenre = useAppSelector((state) => state.tracks.filters.genres)
 
   const uniqueAuthors = [...new Set(playlist.map(track => track.author))];
   // console.log("uniqueAuthors", uniqueAuthors);
@@ -45,21 +53,54 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
 
               {title === "исполнителю" &&
                 uniqueAuthors.map((author) => (
-                  <li className={styles.filter__item} key={author}>
+                  <li
+                    className={
+                      classNames(
+                        styles.filter__item,
+                        { [styles.filter__item_selected]: selectedAuthor.includes(author) }
+                      )
+                    }
+                    key={author}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelect(author)
+                    }}
+                  >
                     {author}
                   </li>
                 ))}
 
               {title === "году выпуска" &&
-                uniqueReleaseYears.map((year) => (
-                  <li className={styles.filter__item} key={year}>
+                // uniqueReleaseYears.map((year) => (
+                list.map((year) => (
+                  <li
+                    className={classNames(
+                      styles.filter__item,
+                      { [styles.filter__item_selected]: selectedYear.includes(year) }
+                    )}
+                    key={year}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelect(String(year))
+                    }}
+                  >
                     {year}
                   </li>
                 ))}
 
               {title === "жанру" &&
                 uniqueGenres.map((genre) => (
-                  <li className={styles.filter__item} key={genre}>
+                  <li
+                    className={classNames(
+                      styles.filter__item,
+                      { [styles.filter__item_selected]: selectedGenre.includes(genre) }
+                    )}
+                    key={genre}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelect(genre)
+                    }}
+                  >
                     {genre}
                   </li>
                 ))}

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import styles from './bar.module.css';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useEffect, useRef, useState, ChangeEvent } from 'react';
 import { setIsPlay, setNextTrack, setPrevTrack, toggleIsShuffle } from '@/store/features/trackSlice';
@@ -217,14 +217,14 @@ export default function Bar() {
           <div className={styles.bar__player}>
             <div className={styles.player__controls}>
               <div
-                className={classnames(styles.player__btnPrev, styles.btn)}
+                className={classNames(styles.player__btnPrev, styles.btn)}
                 onClick={onSetPrevTrack}
               >
                 <svg className={styles.player__btnPrevSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                 </svg>
               </div>
-              <div className={classnames(styles.player__btnPlay, styles.btn)}
+              <div className={classNames(styles.player__btnPlay, styles.btn)}
                 onClick={playPauseTrack}
               >
                 <svg className={styles.player__btnPlaySvg}>
@@ -233,7 +233,7 @@ export default function Bar() {
                 </svg>
               </div>
               <div
-                className={classnames(styles.player__btnNext, styles.btn)}
+                className={classNames(styles.player__btnNext, styles.btn)}
                 onClick={onSetNextTrack}
               >
                 <svg className={styles.player__btnNextSvg}>
@@ -243,7 +243,7 @@ export default function Bar() {
               <div
                 onClick={onToggleLoop}
                 className={
-                  classnames(
+                  classNames(
                     styles.player__btnRepeat,
                     { [styles.btnIcon__active]: isLoop, },
                     { [styles.btnIcon]: !isLoop, },
@@ -255,7 +255,7 @@ export default function Bar() {
               </div>
               <div
                 className={
-                  classnames(
+                  classNames(
                     styles.player__btnShuffle,
                     { [styles.btnIcon__active]: isShuffle, },
                     { [styles.btnIcon]: !isShuffle, }
@@ -290,7 +290,7 @@ export default function Bar() {
 
               <div className={styles.trackPlay__like}>
                 <div
-                  className={classnames(styles.player__btnLike, styles.btnIcon)}
+                  className={classNames(styles.player__btnLike, styles.btnIcon)}
                   onClick={toggleLike}
                 >
                   <svg className={styles.trackPlay__likeSvg}>
@@ -312,9 +312,9 @@ export default function Bar() {
 
                 </svg>
               </div>
-              <div className={classnames(styles.volume__progress, styles.btn)}>
+              <div className={classNames(styles.volume__progress, styles.btn)}>
                 <input
-                  className={classnames(styles.volume__progressLine, styles.btn)}
+                  className={classNames(styles.volume__progressLine, styles.btn)}
                   type="range"
                   name="range"
                   min="0"

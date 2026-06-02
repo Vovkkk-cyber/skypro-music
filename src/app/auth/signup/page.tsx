@@ -69,7 +69,6 @@ export default function SignUp() {
           setErrorMessage("Неизвестная ошибка");
         }
       }
-      // console.log("error: ", error);
     }
   };
 

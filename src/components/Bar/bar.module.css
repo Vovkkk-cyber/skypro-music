@@ -1,5 +1,5 @@
 .bar {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -78,7 +78,8 @@
 .player__btnPlay,
 .player__btnNext,
 .player__btnRepeat,
-.player__btnShuffle {
+.player__btnShuffle,
+.player__btnLike {
   padding: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -137,6 +138,15 @@
 }
 
 .player__btnShuffle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.player__btnLike {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -232,7 +242,7 @@
   color: #ffffff;
 }
 
-.trackPlay__likeDis {
+/* .trackPlay__likeDis {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -244,7 +254,7 @@
   -ms-flex-align: center;
   align-items: center;
   margin-left: 26%;
-}
+} */
 
 .trackPlay__like,
 .trackPlay__dislike {
@@ -258,16 +268,16 @@
   stroke: #696969;
 }
 
-.trackPlay__dislike {
+/* .trackPlay__dislike {
   margin-left: 28.5px;
-}
+} */
 
-.trackPlay__dislikeSvg {
+/* .trackPlay__dislikeSvg {
   width: 14.34px;
   height: 13px;
   fill: transparent;
   stroke: #696969;
-}
+} */
 
 .volume__content {
   display: -webkit-box;
@@ -348,12 +358,12 @@
   cursor: pointer;
 }
 
-.btnIcon:active .trackPlay__likeSvg,
+/* .btnIcon:active .trackPlay__likeSvg,
 .btnIcon:active .trackPlay__dislikeSvg {
   fill: #696969;
   stroke: #ffffff;
   cursor: pointer;
-}
+} */
 
 .btn-text {
   &:hover {
@@ -399,4 +409,8 @@
   line-height: 24px;
   text-align: right;
   color: #ffffff;
+}
+
+.trackPlay__like {
+  display: flex;
 }

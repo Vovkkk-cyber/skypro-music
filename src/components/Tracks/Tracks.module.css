@@ -23,3 +23,11 @@
     font-size: 18px;
     color: #fa4f4f;
 }
+
+.messageContainer {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #cd9fff;
+}
