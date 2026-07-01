@@ -2,7 +2,7 @@ import styles from './centerblock.module.css';
 import Search from '../Search/Search';
 import Filter from '../Filter/Filter';
 import PlaylistTitle from '../Title/Title';
-import PlaylistTracks from '../Tracks/Tracks';
+import Tracks from '../Tracks/Tracks';
 
 
 export default function Centerblock() {
@@ -13,7 +13,7 @@ export default function Centerblock() {
       <Filter />
       <div className={styles.centerblock__content}>
         <PlaylistTitle />
-        <PlaylistTracks />
+        <Tracks />
       </div>
     </div>
   )
