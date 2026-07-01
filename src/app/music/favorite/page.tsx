@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 
 import Centerblock from '@/components/Centerblock/Centerblock';
@@ -35,6 +36,11 @@ export default function FavoritePage() {
     }
   }, [dispatch]);
 
+  // получить плэйлист текущей страницы в зависимости от иcпользования фильтров, поиска
+  // useEffect(() => {
+  //   const currentPlaylist = filters.authors.length ? filtredTracks : myTracks;
+  //   setPlaylist(currentPlaylist);
+  // }, [myTracks, filtredTracks]);
 
   useEffect(() => {
     const isFiltersEnabled = Object.entries(filters).map(([key, value]) => {

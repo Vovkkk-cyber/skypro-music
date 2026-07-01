@@ -45,6 +45,11 @@ export default function Signin() {
     try {
       // авторизоваться
       const authResp = await authUser({ email, password })
+      // console.log("authResp: ", authResp);
+      // console.log("email: ", authResp.data.email);
+      // console.log("username: ", authResp.data.username);
+      // console.log("_id: ", authResp.data._id);
+      // localStorage.setItem("userId", String(authResp.data._id));
 
       // получить время получения токена в секундах и записать в LS
       const tokenGetTime = String(new Date().getTime() / 1000);
@@ -53,6 +58,9 @@ export default function Signin() {
 
       // получить токены, записать в LS
       const tokenResp = await getToken({ email, password })
+
+      // localStorage.setItem("access", tokenResp.data.access);
+      // localStorage.setItem("refresh", tokenResp.data.refresh);
 
       dispatch(setAccessToken(tokenResp.data.access));
       dispatch(setRefreshToken(tokenResp.data.refresh));
@@ -71,17 +79,21 @@ export default function Signin() {
       if (error instanceof AxiosError) {
         if (error.response) {
           // // Запрос был сделан, и сервер ответил кодом состояния, который, выходит за пределы 2xx
-
+          // console.log(error.response.data);
+          // console.log(error.response.status);
+          // console.log(error.response.headers);
           setErrorMessage(error.response.data.message || "Ошибка авторизации");
         } else if (error.request) {
-
+          // // Запрос был сделан, но ответ не получен
+          // console.log(error.request);
           setErrorMessage("Отсутствует интернет. Попробуйте позже");
         } else {
-
+          // // Произошло что-то при настройке запроса, вызвавшее ошибку
+          // console.log('Error', error.message);
           setErrorMessage("Неизвестная ошибка");
         }
       }
-
+      // console.log("error: ", error);
     }
   };
 

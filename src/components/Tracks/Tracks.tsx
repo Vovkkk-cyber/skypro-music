@@ -5,21 +5,21 @@ import Loading from '../Loading/Loading';
 import { useAppSelector } from '@/store/store';
 import { useEffect, useState } from 'react';
 
+
 type PlaylistTracksProp = {
-  // name: string,
-  // author: string,
-  // album: string,
-  // time: string
-  // track: TrackType,
   playlist: TrackType[],
   isLoading: boolean,
   error: string,
   isAuthRequired: boolean
 }
-export default function Tracks({ playlist, isLoading, error, isAuthRequired }: PlaylistTracksProp) {
-   // console.log("data в PlaylistTracks: ", playlist);
+
+
+export default function PlaylistTracks({ playlist, isLoading, error, isAuthRequired }: PlaylistTracksProp) {
+  // console.log("треки в PlaylistTracks: ", playlist);
   // console.log("data в isLoading: ", isLoading);
   const isAccessToken = useAppSelector((state) => state.auth.access);
+
+
   return (
     <div className={styles.content__playlist}>
       {
@@ -35,13 +35,14 @@ export default function Tracks({ playlist, isLoading, error, isAuthRequired }: P
               !playlist.length ?
                 <div className={styles.messageContainer}>Треки не найдены</div>
                 :
-        playlist.map((track) =>
-        <Track
-          key={track._id}
-            track={track}
-            playlist={playlist}
-          />
-           )}
+                playlist.map((track) =>
+                  <Track
+                    key={track._id}
+
+                    track={track}
+                    playlist={playlist}
+                  />
+                )}
     </div>
   )
 }

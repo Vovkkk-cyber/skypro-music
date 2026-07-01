@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 
 import { useParams } from "next/navigation";
@@ -41,12 +42,17 @@ export default function CategoryPage() {
     if (!fetchIsLoading && allTracks.length) {
       getCategoryTracks(params.id)
         .then((res: CategoryType) => {
-          const itemsId = res.items;
+          // console.log("params.id: ", params.id);
+          // console.log("результат запроса категории: ", res);
 
+          const itemsId = res.items;
+          // console.log("id треков категории: ", itemsId);
+
+          // console.log("Название категории:", res.name);
           setCategoryName(res.name);
 
           const filteredTracks = allTracks.filter((track) => itemsId.includes(track._id));
-
+          // console.log("Отфильтрованные треки: ", filteredTracks);
 
           setCategoryTracks(filteredTracks);
         })
@@ -54,14 +60,20 @@ export default function CategoryPage() {
           if (error instanceof AxiosError) {
             if (error.response) {
               // // Запрос был сделан, и сервер ответил кодом состояния, который выходит за пределы 2xx
+              // console.log(error.response.data);
+              // console.log(error.response.status);
+              // console.log(error.response.headers);
 
               setError(error.response.data);
             } else if (error.request) {
-
+              // // Запрос был сделан, но ответ не получен
+              // // `error.request`- это экземпляр XMLHttpRequest в браузере и экземпляр http.ClientRequest в node.js
+              // console.log(error.request);
 
               setError("Отсутствует интеренет");
             } else {
-
+              // // Произошло что-то при настройке запроса, вызвавшее ошибку
+              // console.log('Error', error.message);
 
               setError("Неизвестная ошибка");
             }
@@ -78,7 +90,10 @@ export default function CategoryPage() {
   const [playlist, setPlaylist] = useState<TrackType[]>([]);
 
   // получить плэйлист текущей страницы в зависимости от иcпользования фильтров, поиска
-
+  // useEffect(() => {
+  //   const currentPlaylist = filters.authors.length ? filtredTracks : categoryTracks;
+  //   setPlaylist(currentPlaylist);
+  // }, [categoryTracks, filtredTracks]);
 
   useEffect(() => {
     const isFiltersEnabled = Object.entries(filters).map(([key, value]) => {

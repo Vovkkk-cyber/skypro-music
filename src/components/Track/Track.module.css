@@ -105,12 +105,45 @@
   color: #696969;
 }
 
-.track__timeSvg {
+.track__time {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 65px;
+}
+
+@keyframes likePop {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.track__timeSvgLike {
   width: 14px;
   height: 12px;
   margin-right: 17px;
   fill: transparent;
   stroke: #696969;
+  transition: stroke 0.2s ease;
+}
+
+.track__timeSvgLikeActive {
+  stroke: #b672ff;
+  fill: #b672ff;
+}
+
+.track__timeSvgAnimating {
+  animation: likePop 1s ease-in-out infinite;
 }
 
 .track__timeText {
@@ -123,10 +156,12 @@
 }
 
 @keyframes bubble_out {
+
   0%,
   to {
     transform: scale(0.5);
   }
+
   50% {
     transform: scale(1);
   }

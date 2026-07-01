@@ -11,6 +11,8 @@ export default function Search() {
 
   const [searchInput, setSearchInput] = useState('');
 
+  // const searchText = useAppSelector((state) => state.tracks.searchString);
+
 
   const onSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);

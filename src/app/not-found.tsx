@@ -1,5 +1,6 @@
 'use client';
 
+
 import Navigation from '@/components/Navigation/Navigation';
 import styles from '@/app/not-found.module.css';
 import Image from 'next/image';
@@ -139,7 +140,6 @@ export default function NotFound() {
                       min="0"
                       max="1"
                       step="0.01"
-                    // value={volume}
                     />
                   </div>
                 </div>
