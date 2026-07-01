@@ -1,19 +1,34 @@
 import styles from './centerblock.module.css';
 import Search from '../Search/Search';
 import Filter from '../Filter/Filter';
-import PlaylistTitle from '../Title/Title';
+import Title from '../Title/Title';
 import Tracks from '../Tracks/Tracks';
+import { TrackType } from '@/sharedTypes/sharedTypes';
 
 
-export default function Centerblock() {
+type CenterblockProp = {
+  // name: string,
+  // author: string,
+  // album: string,
+  // time: string
+  // track: TrackType,
+  playlist: TrackType[],
+  categoryName?: string,
+  isLoading: boolean,
+  error: string
+}
+
+
+export default function Centerblock({ playlist, categoryName, isLoading, error }: CenterblockProp) {
+  // console.log("Отфильтрованные треки в Centerblock: ", playlist);
   return (
     <div className={styles.centerblock}>
-      <Search/>
-      <h2 className={styles.centerblock__h2}>Треки</h2>
-      <Filter />
+      <Search />
+      <h2 className={styles.centerblock__h2}>{categoryName || 'Треки'}</h2>
+      <Filter playlist={playlist} />
       <div className={styles.centerblock__content}>
-        <PlaylistTitle />
-        <Tracks />
+        <Title />
+        <Tracks playlist={playlist} isLoading={isLoading} error={error}/>
       </div>
     </div>
   )

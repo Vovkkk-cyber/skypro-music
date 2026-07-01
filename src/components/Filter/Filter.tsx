@@ -3,9 +3,20 @@
 import styles from './filter.module.css';
 import FilterItem from '../FilterItem/FilterItem';
 import { useState } from 'react';
+import { TrackType } from '@/sharedTypes/sharedTypes';
 
 
-export default function Filter() {
+type FilterProp = {
+  // name: string,
+  // author: string,
+  // album: string,
+  // time: string
+  // track: TrackType,
+  playlist: TrackType[]
+}
+
+
+export default function Filter({ playlist }: FilterProp) {
   const [isOpen, setIsOpen] = useState("");
   const [activeFilter, setActiveFilter] = useState("");
 
@@ -23,18 +34,21 @@ export default function Filter() {
         onClick={() => onOpenDropdownList("исполнителю")}
         isOpen={isOpen === "исполнителю"}
         activeFilter={activeFilter}
-        />
+        playlist={playlist}
+      />
       <FilterItem
         title="году выпуска"
         onClick={() => onOpenDropdownList("году выпуска")}
         isOpen={isOpen === "году выпуска"}
         activeFilter={activeFilter}
-        />
+        playlist={playlist}
+      />
       <FilterItem
         title="жанру"
         onClick={() => onOpenDropdownList("жанру")}
         isOpen={isOpen === "жанру"}
         activeFilter={activeFilter}
+        playlist={playlist}
       />
     </div>
   )
