@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google';
 import './globals.css';
 import ReduxProvider from '@/store/ReduxProvider';
 
+
 const montserrat = Montserrat({
   variable: '--font-montserrat',
   subsets: ['latin'],
