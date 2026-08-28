@@ -1,0 +1,34 @@
+import { refreshAccessToken } from "@/app/services/auth/authApi";
+import { setAccessToken } from "@/store/features/authSlice";
+import { AppDispatch } from "@/store/store";
+import { AxiosError } from "axios";
+
+
+export const reAuth = async <T>(
+  apiFunction: (access: string) => Promise<T>,
+  refresh: string,
+  dispatch: AppDispatch,
+): Promise<T> => {
+  try {
+    // Пытаемся выполнить запрос
+    return await apiFunction('');
+  } catch (error) {
+    const axiosError = error as AxiosError;
+
+    // Если ошибка 401, обновляем токен и повторяем запрос
+    if (axiosError.response?.status === 401) {
+      try {
+        const newAccessToken = await refreshAccessToken(refresh); // Обновляем токен
+        dispatch(setAccessToken(newAccessToken));
+       return await apiFunction(newAccessToken);
+      } catch (refreshError) {
+       throw refreshError;
+      }
+    }
+
+    // Если ошибка не 401, пробрасываем её
+    console.log(error);
+    throw error;
+  }
+};
+

@@ -1,3 +1,180 @@
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background-color: #181818;
+}
+
+.container {
+  max-width: 1920px;
+  height: 100vh;
+  margin: 0 auto;
+  /* position: relative; */
+  background-color: #181818;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.main {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  /* justify-content: space-between; */
+}
+
+.nav__container {
+  display: flex;
+  justify-content: center;
+}
+
+.logout__container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.centerblock__container {
+  display: flex;
+  flex-direction: column;
+  /* background-color: rgb(109, 252, 252); */
+}
+
+.not_found__wrapper {
+  width: 100%;
+  /* min-height: 100%; */
+  height: 100%;
+  /* width: 431px; */
+  min-height: 366px;
+  overflow: hidden;
+  /* background-color: pink; */
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* align-content: center; */
+  align-items: center;
+  justify-content: center;
+}
+
+.not_found__container {
+  /* background-color: green; */
+  /* width: 100%; */
+  min-width: 431px;
+  display: flex;
+  flex-direction: column;
+  /* align-content: center; */
+  align-items: center;
+}
+
+.not_found__error {
+  color: #ffffff;
+  /* font-family: StratosSkyeng; */
+  font-weight: 400;
+  font-size: 160px;
+  line-height: 168px;
+  letter-spacing: 0px;
+  margin-bottom: 2px;
+}
+
+.not_found__text_container {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.not_found__text {
+  color: #ffffff;
+  /* font-family: StratosSkyeng; */
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 0%;
+  margin-bottom: 8px;
+}
+
+.not_found__image {
+  width: 52px;
+  height: 52px;
+}
+
+.not_found__message01 {
+  color: #ffffff;
+  /* font-family: StratosSkyeng; */
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.3%;
+  text-align: center;
+  color: #4E4E4E;
+}
+
+.not_found__message02 {
+  color: #ffffff;
+  /* font-family: StratosSkyeng; */
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.3%;
+  text-align: center;
+  color: #4E4E4E;
+  margin-bottom: 36px;
+}
+
+.not_found__button_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not_found__button {
+  width: 278px;
+  height: 52px;
+  background-color: #580EA2;
+  border-radius: 6px;
+  /* margin-top: 30px;
+  margin-bottom: 20px; */
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.05px;
+  color: #ffffff;
+  /* font-family: StratosSkyeng; */
+  font-weight: 400;
+  /* font-style: Regular; */
+  font-size: 18px;
+  /* leading-trim: NONE; */
+  line-height: 24px;
+  letter-spacing: -0.3%;
+  /* font-variant-numeric-figure: lining-nums; */
+  /* font-variant-numeric-spacing: proportional-nums; */
+
+}
+
+
+
+
 .bar {
   position: absolute;
   bottom: 0;
@@ -413,4 +590,43 @@
 
 .trackPlay__like {
   display: flex;
+}
+
+.main__sidebar {
+  max-width: 418px;
+  padding: 20px 90px 20px 78px;
+}
+
+.sidebar__personal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 12px 0 15px 0;
+}
+
+/* .sidebar__personalName {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  margin-right: 16px;
+} */
+
+.sidebar__icon {
+  width: 40px;
+  height: 40px;
+  background-color: #313131;
+  border-radius: 50%;
+  cursor: pointer;
 }

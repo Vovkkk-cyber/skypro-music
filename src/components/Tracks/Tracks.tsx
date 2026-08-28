@@ -2,8 +2,8 @@ import styles from './Tracks.module.css';
 import Track from '../Track/Track';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import Loading from '../Loading/Loading';
-// import { data } from '@/data';
-// import {formatTime} from '@/utils/helpers'
+import { useAppSelector } from '@/store/store';
+import { useEffect, useState } from 'react';
 
 type PlaylistTracksProp = {
   // name: string,
@@ -13,28 +13,31 @@ type PlaylistTracksProp = {
   // track: TrackType,
   playlist: TrackType[],
   isLoading: boolean,
-  error: string
+  error: string,
+  isAuthRequired: boolean
 }
-export default function Tracks({ playlist, isLoading, error }: PlaylistTracksProp) {
+export default function Tracks({ playlist, isLoading, error, isAuthRequired }: PlaylistTracksProp) {
    // console.log("data в PlaylistTracks: ", playlist);
   // console.log("data в isLoading: ", isLoading);
+  const isAccessToken = useAppSelector((state) => state.auth.access);
   return (
     <div className={styles.content__playlist}>
-      {error ?
-        <div className={styles.errorContainer}>{error}</div>
-        :
-        <div className={styles.errorContainer}>{error}</div>
-      }
-      {isLoading ?
-        <Loading />
-        :
+      {
+        !isAccessToken && isAuthRequired ?
+          <div className={styles.messageContainer}>Авторизуйтесь чтобы посмотреть избранные треки</div>
+          :
+          error ?
+            <div className={styles.errorContainer}>{error}</div>
+            :
+            isLoading ?
+              <Loading />
+              :
+              !playlist.length ?
+                <div className={styles.messageContainer}>Треки не найдены</div>
+                :
         playlist.map((track) =>
         <Track
           key={track._id}
-            // name={track.name}
-            // author={track.author}
-            // album={track.album}
-            // time={formatTime(track.duration_in_seconds)}
             track={track}
             playlist={playlist}
           />
