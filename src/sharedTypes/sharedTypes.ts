@@ -8,7 +8,7 @@ export type TrackType = {
   album: string,
   logo: string | null,
   track_file: string,
-  stared_user: string[],
+  staredUser: string[],
 }
 
 export type CategoryType = {

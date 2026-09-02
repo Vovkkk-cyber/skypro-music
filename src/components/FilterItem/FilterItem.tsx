@@ -2,24 +2,27 @@
 
 import classNames from 'classnames';
 import styles from './filterItem.module.css';
-// import { data } from '@/data';
 import { useState } from 'react';
 import { TrackType } from '@/sharedTypes/sharedTypes';
+import { useAppSelector } from '@/store/store';
 
 
 type titleItemProp = {
   title: string,
   onClick: () => void,
   isOpen: boolean,
-  activeFilter: string
-  playlist: TrackType[]
+  activeFilter: string,
+  playlist: TrackType[],
+  filterName: string,
+  list: string[],
+  onSelect: (value: string) => void,
 }
 
-export default function FilterItem({ title, onClick, isOpen, activeFilter, playlist }: titleItemProp) {
-  // console.log("playlist в FilterItem: ", playlist);
-  // console.log("title в компоненте FilterItem: ", title);
-  // console.log("activeFilter в компоненте FilterItem: ", activeFilter);
-  // console.log("isOpen в компоненте FilterItem: ", isOpen);
+export default function FilterItem({ title, onClick, isOpen, activeFilter, playlist, filterName, list, onSelect }: titleItemProp) {
+
+  const selectedAuthor = useAppSelector((state) => state.tracks.filters.authors)
+  const selectedYear = useAppSelector((state) => state.tracks.filters.years)
+  const selectedGenre = useAppSelector((state) => state.tracks.filters.genres)
 
   const uniqueAuthors = [...new Set(playlist.map(track => track.author))];
   // console.log("uniqueAuthors", uniqueAuthors);
@@ -30,19 +33,10 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
   const uniqueGenres = [...new Set(playlist.flatMap(track => track.genre))];
   // console.log("uniqueGenres", uniqueGenres);
 
-  // let count: number = 0;
-  // if (title === "исполнителю") {
-  //   count = uniqueAuthors.length;
-  // } else if (title === "году выпуска") {
-  //   count = uniqueReleaseYears.length;
-  // } else if (title === "жанру") {
-  //   count = uniqueGenres.length;
-  // }
 
   return (
     <>
       <div className={
-        // activeFilter && title && isOpen
         isOpen
           ?
           classNames(styles.filter__button, {
@@ -59,21 +53,54 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
 
               {title === "исполнителю" &&
                 uniqueAuthors.map((author) => (
-                  <li className={styles.filter__item} key={author}>
+                  <li
+                    className={
+                      classNames(
+                        styles.filter__item,
+                        { [styles.filter__item_selected]: selectedAuthor.includes(author) }
+                      )
+                    }
+                    key={author}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelect(author)
+                    }}
+                  >
                     {author}
                   </li>
                 ))}
 
               {title === "году выпуска" &&
-                uniqueReleaseYears.map((year) => (
-                  <li className={styles.filter__item} key={year}>
+                // uniqueReleaseYears.map((year) => (
+                list.map((year) => (
+                  <li
+                    className={classNames(
+                      styles.filter__item,
+                      { [styles.filter__item_selected]: selectedYear.includes(year) }
+                    )}
+                    key={year}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelect(String(year))
+                    }}
+                  >
                     {year}
                   </li>
                 ))}
 
               {title === "жанру" &&
                 uniqueGenres.map((genre) => (
-                  <li className={styles.filter__item} key={genre}>
+                  <li
+                    className={classNames(
+                      styles.filter__item,
+                      { [styles.filter__item_selected]: selectedGenre.includes(genre) }
+                    )}
+                    key={genre}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelect(genre)
+                    }}
+                  >
                     {genre}
                   </li>
                 ))}
@@ -81,13 +108,6 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
             </ul>
           </div>
         }
-        {/* {isOpen ?
-          <div className={styles.filter__count}>
-            {count}
-          </div>
-          :
-          null
-        } */}
       </div>
     </>
   )
