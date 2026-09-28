@@ -3,7 +3,6 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(28, 28, 28, 0.5);
 }
 
 .bar__content {
@@ -34,6 +33,7 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  background-color: var(--bg-barPlayer);
 }
 
 .bar__player {
@@ -187,7 +187,7 @@
 .trackPlay__image {
   width: 51px;
   height: 51px;
-  background-color: #313131;
+  background-color: var(--bg-tertiary);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -223,7 +223,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
   white-space: nowrap;
 }
 
@@ -239,22 +239,8 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
-
-/* .trackPlay__likeDis {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-left: 26%;
-} */
 
 .trackPlay__like,
 .trackPlay__dislike {
@@ -267,17 +253,6 @@
   fill: transparent;
   stroke: #696969;
 }
-
-/* .trackPlay__dislike {
-  margin-left: 28.5px;
-} */
-
-/* .trackPlay__dislikeSvg {
-  width: 14.34px;
-  height: 13px;
-  fill: transparent;
-  stroke: #696969;
-} */
 
 .volume__content {
   display: -webkit-box;
@@ -335,7 +310,7 @@
   width: 16px;
   height: 16px;
   background: #1a1a1a;
-  border: 2px solid white;
+  border: 2px solid var(--text-primary);
   border-radius: 50%;
   position: relative;
   margin-top: -7px;
@@ -353,29 +328,19 @@
 
 .btnIcon:active svg {
   fill: transparent;
-  /* stroke: #ffffff; */
   stroke: #ad61ff;
   cursor: pointer;
 }
-
-/* .btnIcon:active .trackPlay__likeSvg,
-.btnIcon:active .trackPlay__dislikeSvg {
-  fill: #696969;
-  stroke: #ffffff;
-  cursor: pointer;
-} */
 
 .btn-text {
   &:hover {
     border-color: #d9b6ff;
     color: #d9b6ff;
-    /* cursor: pointer; */
   }
 
   &:active {
     border-color: #ad61ff;
     color: #ad61ff;
-    /* cursor: pointer; */
   }
 }
 
@@ -391,7 +356,6 @@
   &:hover {
     fill: #cd9fff;
     stroke: #cd9fff;
-    /* cursor: pointer; */
   }
 }
 
@@ -400,6 +364,7 @@
   justify-content: flex-end;
   padding-right: 20px;
   padding-bottom: 10px;
+  background: var(--bg-barTime);
 }
 
 .trackPlay__time {
@@ -408,7 +373,7 @@
   font-size: 16px;
   line-height: 24px;
   text-align: right;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .trackPlay__like {

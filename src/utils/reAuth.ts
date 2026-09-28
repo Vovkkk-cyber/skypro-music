@@ -19,11 +19,8 @@ export const reAuth = async <T>(
     if (axiosError.response?.status === 401) {
       try {
         const newAccessToken = await refreshAccessToken(refresh); // Обновляем токен
-        // console.log("newAccessToken: ", newAccessToken);
-        // dispatch(setAccessToken(newAccessToken.access));
         dispatch(setAccessToken(newAccessToken));
         // Повторяем исходный запрос
-        // return await apiFunction(newAccessToken.access);
         return await apiFunction(newAccessToken);
       } catch (refreshError) {
         // Если обновление токена не удалось, пробрасываем ошибку
@@ -36,20 +33,3 @@ export const reAuth = async <T>(
     throw error;
   }
 };
-
-
-  // // ПРИМЕР ИСПОЛЬЗОВАНИЯ
-  // const refreshToken = useAppSelector((state) => state.auth.refresh);
-  // const accessToken = useAppSelector((state) => state.auth.access);
-  // const logout = async() => {// добавляем async
-  //   dispatch(clearUser());
-  //   router.push("/auth/signin");
-
-  //   const resp = await reAuth(
-  //     // ((newAccessToken) => getTracks(newAccessToken || accessToken)),// getFavoriteTracks(newAccessToken || accessToken, id и какие ещё нужно параметры)), передаём колбэк функцию, а которой вызываем нужную функцию и передаём в них новый токен или существующий, если он ещё не потух. Если не протух, то выплняется первый try
-  //     ((newAccessToken) => getFavoriteTracks(newAccessToken || accessToken)),
-  //     // ((newAccessToken) => getTracks()),
-  //     refreshToken, // из Redux берём
-  //     dispatch // из Redux берём
-    // )
-  // };

@@ -1,5 +1,6 @@
 'use client';
 
+
 import { ReactNode } from "react";
 import styles from './layout.module.css';
 import Bar from "@/components/Bar/Bar";

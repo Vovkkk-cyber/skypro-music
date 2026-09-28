@@ -1,4 +1,3 @@
-
 .modal__form input:first-child {
     margin-bottom: 30px;
 }
@@ -100,13 +99,13 @@
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.05px;
-    color: #ffffff;
+    color: #FFFFFF;
 }
 
 .modal__btnSignup {
     width: 278px;
     height: 52px;
-    background-color: transparent;
+    background-color: #FFFFFF;
     border: 1px solid #d0cece;
     border-radius: 6px;
     font-style: normal;

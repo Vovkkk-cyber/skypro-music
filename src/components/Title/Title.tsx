@@ -2,7 +2,7 @@ import styles from './Title.module.css';
 import classNames from 'classnames';
 
 
-export default function CenterblockTitle() {
+export default function CenterblockPlaylistTitle() {
   return (
     <div className={styles.content__title}>
       <div className={classNames(styles.Title__col, styles.col01)}>Трек</div>

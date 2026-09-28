@@ -6,9 +6,35 @@ import userEvent from '@testing-library/user-event';
 import Centerblock from '../Centerblock/Centerblock';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { data } from '@/data';
+import * as storeHooks from "@/store/store";
 
 
 const mockTracks: TrackType[] = data;
+
+
+// создать мок для теста
+jest.spyOn(storeHooks, 'useAppSelector').mockImplementation((selectorFn: any) => {
+  // создать фейковое состояние (без скелетона, чтобы сразу отобразилось 'Авторизуйтесь')
+  const mockState = {
+    auth: {
+      username: null,
+      access: null // нет авторизации
+    },
+    tracks: {
+      fetchIsLoading: false, // состояние загрузки false
+      favoriteTracks: [],
+      filters: {
+        authors: [],
+        years: 'По умолчанию',
+        genres: []
+      }
+    },
+    theme: {
+      theme: 'dark'
+    }
+  };
+  return selectorFn(mockState as any);
+});
 
 
 // Мокирование useRouter из next/navigation
@@ -36,7 +62,7 @@ describe('Sidebar component with next/navigation', () => {
   });
 
 
-  test('Отображается "Авторизуйтесь"', () => {
+  test('Отображается "Авторизуйтесь" если пользователь не авторизовался', () => {
     render(
       <ReduxProvider>
         <Sidebar />
@@ -45,19 +71,16 @@ describe('Sidebar component with next/navigation', () => {
     expect(screen.getAllByText('Авторизуйтесь').length).toBeGreaterThan(0);
   });
 
-  test('Отображается кнопка выхода', () => {
+  test('Не отображается кнопка выхода', () => {
     const { container } = render(
       <ReduxProvider>
         <Sidebar />
       </ReduxProvider>
     );
 
-    const logoutButton = container.querySelector('div.sidebar__icon');
     const logoutButtons = container.querySelectorAll('div.sidebar__icon');
 
-    expect(logoutButtons.length).toBe(1);
-    expect(logoutButton).toBeInTheDocument();
-    expect(logoutButton).toBeVisible();
+    expect(logoutButtons.length).toBe(0);
   });
 
   test('Отображается три карточки категорий', () => {
@@ -85,7 +108,6 @@ describe('Sidebar component with next/navigation', () => {
         <Sidebar />
       </ReduxProvider>
     );
-    // console.log(screen.debug());
 
     const sidebarItems = screen.getAllByRole('link');
 
@@ -104,7 +126,6 @@ describe('Sidebar component with next/navigation', () => {
       </ReduxProvider>
     );
 
-    console.log(screen.debug());
 
     // проверить, что отображается корректное название категории
     expect(screen.getByText('Плэйлист дня')).toBeInTheDocument();

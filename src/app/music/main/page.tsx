@@ -16,7 +16,6 @@ export default function Home() {
 
   const isAuthRequired = false;
 
-  // получить плэйлист текущей страницы
   const [playlist, setPlaylist] = useState<TrackType[]>([]);
 
   useEffect (() => {

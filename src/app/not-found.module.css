@@ -2,19 +2,18 @@
   width: 100%;
   min-height: 100%;
   overflow: hidden;
-  background-color: #181818;
+  background-color: var(--bg-primary); 
 }
 
 .container {
   max-width: 1920px;
   height: 100vh;
   margin: 0 auto;
-  /* position: relative; */
-  background-color: #181818;
+  position: relative;
+  background-color: var(--bg-primary); 
   color: #fff;
   display: flex;
   flex-direction: column;
-  
 }
 
 .main {
@@ -23,14 +22,12 @@
   flex: 1 1 auto;
   display: -webkit-box;
   display: -ms-flexbox;
-  /* display: flex; */
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  /* justify-content: space-between; */
 }
 
 .nav__container {
@@ -46,37 +43,27 @@
 .centerblock__container {
   display: flex;
   flex-direction: column;
-  /* background-color: rgb(109, 252, 252); */
 }
 
 .not_found__wrapper {
   width: 100%;
-  /* min-height: 100%; */
   height: 100%;
-  /* width: 431px; */
   min-height: 366px;
   overflow: hidden;
-  /* background-color: pink; */
   display: flex;
-  /* flex-wrap: wrap; */
-  /* align-content: center; */
   align-items: center;
   justify-content: center;
 }
 
 .not_found__container {
-  /* background-color: green; */
-  /* width: 100%; */
   min-width: 431px;
   display: flex;
   flex-direction: column;
-  /* align-content: center; */
   align-items: center;
 }
 
 .not_found__error {
-  color: #ffffff;
-  /* font-family: StratosSkyeng; */
+  color: var(--text-primary);
   font-weight: 400;
   font-size: 160px;
   line-height: 168px;
@@ -85,7 +72,6 @@
 }
 
 .not_found__text_container {
-  /* width: 100%; */
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -95,8 +81,7 @@
 }
 
 .not_found__text {
-  color: #ffffff;
-  /* font-family: StratosSkyeng; */
+  color: var(--text-primary);
   font-weight: 400;
   font-size: 32px;
   line-height: 40px;
@@ -110,8 +95,7 @@
 }
 
 .not_found__message01 {
-  color: #ffffff;
-  /* font-family: StratosSkyeng; */
+  color: var(--text-primary);
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
@@ -121,8 +105,7 @@
 }
 
 .not_found__message02 {
-  color: #ffffff;
-  /* font-family: StratosSkyeng; */
+  color: var(--text-primary);
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
@@ -143,8 +126,6 @@
   height: 52px;
   background-color: #580EA2;
   border-radius: 6px;
-  /* margin-top: 30px;
-  margin-bottom: 20px; */
   border: none;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -159,21 +140,13 @@
   font-size: 18px;
   line-height: 24px;
   letter-spacing: -0.05px;
-  color: #ffffff;
-  /* font-family: StratosSkyeng; */
+  color: var(--text-primary);
   font-weight: 400;
-  /* font-style: Regular; */
   font-size: 18px;
-  /* leading-trim: NONE; */
   line-height: 24px;
   letter-spacing: -0.3%;
-  /* font-variant-numeric-figure: lining-nums; */
-  /* font-variant-numeric-spacing: proportional-nums; */
-
+  cursor: pointer;
 }
-
-
-
 
 .bar {
   position: absolute;
@@ -211,6 +184,7 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  border-top: 5px solid #2E2E2E;
 }
 
 .bar__player {
@@ -283,12 +257,6 @@
   width: 22px;
   height: 20px;
   fill: #d9d9d9;
-}
-
-.player__btnPrev:hover .player__btnPrevSvg,
-.player__btnPlay:hover .player__btnPlaySvg,
-.player__btnNext:hover .player__btnNextSvg {
-  filter: invert(43%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(93%) contrast(86%);
 }
 
 .player__btnNext {
@@ -364,7 +332,7 @@
 .trackPlay__image {
   width: 51px;
   height: 51px;
-  background-color: #313131;
+  background-color: var(--bg-tertiary);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -400,7 +368,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
   white-space: nowrap;
 }
 
@@ -416,22 +384,8 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
-
-/* .trackPlay__likeDis {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-left: 26%;
-} */
 
 .trackPlay__like,
 .trackPlay__dislike {
@@ -444,17 +398,6 @@
   fill: transparent;
   stroke: #696969;
 }
-
-/* .trackPlay__dislike {
-  margin-left: 28.5px;
-} */
-
-/* .trackPlay__dislikeSvg {
-  width: 14.34px;
-  height: 13px;
-  fill: transparent;
-  stroke: #696969;
-} */
 
 .volume__content {
   display: -webkit-box;
@@ -482,7 +425,6 @@
   width: 13px;
   height: 18px;
   fill: transparent;
-  cursor: pointer;
 }
 
 .volume__progress {
@@ -498,7 +440,6 @@
   background: #797979;
   border-radius: 5px;
   outline: none;
-  cursor: pointer;
 }
 
 .volume__progressLine::-webkit-slider-runnable-track {
@@ -512,64 +453,10 @@
   width: 16px;
   height: 16px;
   background: #1a1a1a;
-  border: 2px solid white;
+  border: 2px solid var(--text-primary);
   border-radius: 50%;
   position: relative;
   margin-top: -7px;
-}
-
-.btn {
-  cursor: pointer;
-}
-
-.btnIcon:hover svg {
-  fill: transparent;
-  stroke: #acacac;
-  cursor: pointer;
-}
-
-.btnIcon:active svg {
-  fill: transparent;
-  /* stroke: #ffffff; */
-  stroke: #ad61ff;
-  cursor: pointer;
-}
-
-/* .btnIcon:active .trackPlay__likeSvg,
-.btnIcon:active .trackPlay__dislikeSvg {
-  fill: #696969;
-  stroke: #ffffff;
-  cursor: pointer;
-} */
-
-.btn-text {
-  &:hover {
-    border-color: #d9b6ff;
-    color: #d9b6ff;
-    /* cursor: pointer; */
-  }
-
-  &:active {
-    border-color: #ad61ff;
-    color: #ad61ff;
-    /* cursor: pointer; */
-  }
-}
-
-.audio {
-  display: none;
-}
-
-.btnIcon__active svg {
-  fill: #ad61ff;
-  stroke: #ad61ff;
-  cursor: pointer;
-
-  &:hover {
-    fill: #cd9fff;
-    stroke: #cd9fff;
-    /* cursor: pointer; */
-  }
 }
 
 .trackPlay__timeBlock {
@@ -585,7 +472,7 @@
   font-size: 16px;
   line-height: 24px;
   text-align: right;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .trackPlay__like {
@@ -614,19 +501,9 @@
   padding: 12px 0 15px 0;
 }
 
-/* .sidebar__personalName {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #ffffff;
-  margin-right: 16px;
-} */
-
 .sidebar__icon {
   width: 40px;
   height: 40px;
-  background-color: #313131;
+  background-color: var(--bg-tertiary);
   border-radius: 50%;
-  cursor: pointer;
 }

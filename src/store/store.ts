@@ -2,12 +2,15 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from 'react-redux';
 import { trackSliceReducer } from '@/store/features/trackSlice';
 import { authSliceReducer } from './features/authSlice';
+import { themeSliceReducer } from './features/themeSlice';
+
 
 export const makeStore = () => {
   return configureStore({
     reducer: combineReducers({
       tracks: trackSliceReducer,
       auth: authSliceReducer,
+      theme: themeSliceReducer
     }),
   });
 };
@@ -19,6 +22,11 @@ export type AppStore = ReturnType<typeof makeStore>;
 type RootState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];
 
+// // Для нового TS
+// // Use throughout your app instead of plain \`useDispatch\` and \`useSelector\`
+// export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+// export const useAppSelector = useSelector.withTypes<RootState>();
+// export const useAppStore = useStore.withTypes<AppStore>();
 
 // Для старого TS
 export const useAppDispatch: () => AppDispatch = useDispatch;

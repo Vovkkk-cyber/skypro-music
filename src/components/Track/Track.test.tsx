@@ -37,7 +37,7 @@ afterEach(() => {
 });
 
 
-describe('PlaylistTrack component', () => {
+describe('Track component', () => {
   test('Рендеринг данных трека', () => {
     render(
       <ReduxProvider>
@@ -91,7 +91,7 @@ describe('PlaylistTrack component', () => {
       expect(likeButton).toHaveAttribute('xlink:href', '/img/icon/sprite.svg#icon-like');
       expect(likeButton).not.toHaveAttribute('xlink:href', '/img/icon/sprite.svg#icon-like-active');
     } else {
-      throw new Error('Названий треков не обнаружено');
+      throw new Error('Без авторизации установился лайк');
     }
   });
 });

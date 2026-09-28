@@ -56,17 +56,6 @@ export const getTimePanel = (
   }
 }
 
-// export function sortByReleaseDateAsc(arr: TrackType[]): TrackType[] {
-//   return [...arr].sort((a, b) => {
-//     return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
-//   })
-// }
-
-// export function sortByReleaseDateDesc(arr: TrackType[]): TrackType[] {
-//   return [...arr].sort((a, b) => {
-//     return new Date(a.release_date).getTime() - new Date(b.release_date).getTime();
-//   })
-// }
 
 export function sortByReleaseDate(arr: TrackType[], type: string): TrackType[] {
   if (type === 'Сначала новые') {

@@ -1,13 +1,12 @@
 .filter__button {
-  /*composes: btn-text from '/src/UI/Button/button.module.css';*/
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--text-primary);
   border-radius: 60px;
   padding: 6px 20px;
-  color: #FFFFFF;
+  color: var(--text-primary);
   cursor: pointer;
   position: relative;
 }
@@ -27,18 +26,17 @@
 }
 
 .filter__wrapper {
-  /* width: 248px; */
-  /* height: 305px; */
   padding: 34px;
-  background-color: #313131;
+  background-color: var(--bg-tertiary);
   border-radius: 12px;
   position: absolute;
   top: 49px;
   left: 0px;
+  max-width: max-content;
 }
 
 .filter__list {
-  color: white;
+  color: var(--text-primary);
   display: flex;
   gap: 28px;
   height: max-content;
@@ -53,11 +51,11 @@
   }
 
   &::-webkit-scrollbar-track {
-    background-color: rgba(75, 73, 73, 1);
+    background-color: var(--bg-scroll-track);
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: white;
+    background-color: var(--bg-scroll);
   }
 }
 
@@ -71,4 +69,17 @@
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3.5px;
+}
+
+.filter__count {
+  width: 26px;
+  height: 25.5px;
+  color: #FFFFFF;
+  background-color: #AD61FF;
+  font-size: 13px;
+  border-radius: 50%;
+  text-align: center;
+  position: absolute;
+  top: -9px;
+  right: -8px;
 }

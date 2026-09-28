@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/set-state-in-effect */
+
 'use client';
 
 import Link from 'next/link';
@@ -27,15 +27,11 @@ export default function Track({ track, playlist }: trackTypeProp) {
 
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
-  // console.log("currentTrack в PlaylistTrack: ", currentTrack);
 
   const currentTrackId = useAppSelector((state) => state.tracks.currentTrack?._id)
-  // console.log("currentTrackId в PlaylistTrack: ", currentTrackId);
-
+ 
   // проверить, что текущий трек играет
   const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
-  // console.log("currentTrackIsPlay в PlaylistTrack: ", currentTrackIsPlay);
-
 
     // Эффект для отслеживания окончания загрузки
   useEffect(() => {
@@ -90,9 +86,7 @@ export default function Track({ track, playlist }: trackTypeProp) {
           </Link>
         </div>
         <div className={styles.track__time}>
-          {/* <svg className={styles.track__timeSvgLike}
-            onClick={toggleLike}
-          > */}
+
 
           <svg
             className={classNames(

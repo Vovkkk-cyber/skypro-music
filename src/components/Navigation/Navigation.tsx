@@ -1,5 +1,6 @@
 'use client'
 
+
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './navigation.module.css';
@@ -7,18 +8,26 @@ import { useEffect, useState } from 'react';
 import { clearUser } from '@/store/features/authSlice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useRouter } from 'next/navigation';
+import { setTheme, ThemeMode } from '@/store/features/themeSlice';
 
 
 export default function Navigation() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const isAccessToken = useAppSelector((state) => state.auth.access);
-  // console.log("isAccessToken: ", isAccessToken);
+  const currentTheme = useAppSelector((state) => state.theme.theme);
 
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as ThemeMode | null;
+    if (savedTheme && savedTheme !== currentTheme) {
+      dispatch(setTheme(savedTheme));
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     if (!isAccessToken) {
@@ -48,6 +57,10 @@ export default function Navigation() {
     router.push("/auth/signin");
   };
 
+  const toggleTheme = () => {
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    dispatch(setTheme(nextTheme));
+  };
 
   return (
     <nav className={styles.main__nav}>
@@ -106,8 +119,9 @@ export default function Navigation() {
                   width={39}
                   height={39}
                   className={styles.theme__image}
-                  src="/img/icon/theme-dark.svg"
+                  src={currentTheme === 'dark' ? '/img/icon/theme-dark.svg' : '/img/icon/theme-light.svg'}
                   alt={'theme'}
+                  onClick={toggleTheme}
                 />
               </div>
             </li>
