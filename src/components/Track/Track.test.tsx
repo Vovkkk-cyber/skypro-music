@@ -83,7 +83,7 @@ describe('Track component', () => {
       </ReduxProvider>
     );
 
-    const likeButton = container.querySelector('svg.track__timeSvg > use');
+    const likeButton = container.querySelector('svg.track__timeSvgLike > use');
 
     if (likeButton) {
       await user.click(likeButton);
