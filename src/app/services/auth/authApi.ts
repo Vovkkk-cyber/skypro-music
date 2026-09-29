@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../constants";
+import { toast } from 'react-toastify';
 
 
 type authUserProps = {
@@ -44,15 +45,6 @@ type getTokenReturn = {
   }
 };
 
-// type refreshTokenProps = {
-//   refreshToken: string,
-// };
-
-type refreshTokenReturn = {
-  // data: {
-    access: string,
-  // }
-};
 
 export const authUser = (data: authUserProps): Promise<authUserReturn> => {
   return axios.post(BASE_URL + '/user/login/',
@@ -87,14 +79,19 @@ export const getToken = (data: getTokenProps): Promise<getTokenReturn> => {
   );
 };
 
-// export const refreshToken = (refreshToken: refreshTokenProps): Promise<refreshTokenReturn> => {
-export const refreshToken = (refreshToken: string): Promise<refreshTokenReturn> => {
-  return axios.post(BASE_URL + '/token/refresh/',
-    {refresh: refreshToken},
-    {
-      headers: {
-        "content-type": "application/json",
+export const refreshAccessToken = async (userRefreshToken: string): Promise<string> => {
+  try {
+    const resp = await axios.post(BASE_URL + '/user/token/refresh/',
+      { refresh: userRefreshToken },
+      {
+        headers: {
+          "content-type": "application/json",
+        }
       }
-    }
-  );
-};
+    )
+    return resp.data.access
+  } catch (error) {
+    toast.error("Ошибка при обновлении токена");
+    throw error;
+  }
+}

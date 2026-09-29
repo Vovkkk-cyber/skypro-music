@@ -1,21 +1,73 @@
 'use client'
 
+
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './navigation.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { clearUser } from '@/store/features/authSlice';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { useRouter } from 'next/navigation';
+import { setTheme, ThemeMode } from '@/store/features/themeSlice';
 
 
 export default function Navigation() {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const isAccessToken = useAppSelector((state) => state.auth.access);
+  const currentTheme = useAppSelector((state) => state.theme.theme);
+
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as ThemeMode | null;
+    if (savedTheme && savedTheme !== currentTheme) {
+      dispatch(setTheme(savedTheme));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!isAccessToken) {
+      setIsAuth(false);
+      setIsLoading(false);
+      return;
+    } else if (isAccessToken) {
+      setIsAuth(true);
+      setIsLoading(false);
+    }
+  }, [isAccessToken]);
 
   const onOpenBurgerMenu = () => {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
-  }
+  };
+
+  const goToMain = () => {
+    router.push("/music/main");
+  };
+
+  const logout = () => {
+    dispatch(clearUser());
+    router.push("/auth/signin");
+  };
+
+  const login = () => {
+    router.push("/auth/signin");
+  };
+
+  const toggleTheme = () => {
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    dispatch(setTheme(nextTheme));
+  };
 
   return (
     <nav className={styles.main__nav}>
-      <div className={styles.nav__logo}>
+      <div
+        className={styles.nav__logo}
+        onClick={goToMain}
+      >
         <Image
           width={250}
           height={170}
@@ -45,9 +97,21 @@ export default function Navigation() {
               </Link>
             </li>
             <li className={styles.menu__item}>
-              <Link href="/auth/signin" className={styles.menu__link}>
-                Войти
-              </Link>
+              {isAuth ?
+                <p
+                  className={styles.menu__link}
+                  onClick={logout}
+                >
+                  Выйти
+                </p>
+                :
+                <p
+                  className={styles.menu__link}
+                  onClick={login}
+                >
+                  Войти
+                </p>
+              }
             </li>
             <li>
               <div>
@@ -55,8 +119,9 @@ export default function Navigation() {
                   width={39}
                   height={39}
                   className={styles.theme__image}
-                  src="/img/icon/theme-dark.svg"
+                  src={currentTheme === 'dark' ? '/img/icon/theme-dark.svg' : '/img/icon/theme-light.svg'}
                   alt={'theme'}
+                  onClick={toggleTheme}
                 />
               </div>
             </li>

@@ -1,11 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @next/next/no-img-element */
-// export default function Signup () {
-//   return (
-//     <h1>Регистрация</h1>
-//   )
-// }
-
 'use client';
 
 
@@ -61,41 +53,34 @@ export default function SignUp() {
 
     try {
       const res = await regUser({ email, username, password, passwordConfirmed })
-      // .then((res) => {
-        // console.log("Ответ после регистрации: ", res);
 
-        setIsLoading(false);
-        
-        router.push('/auth/signin');
-        // })
-      }   
-      catch(error) {
-        setIsLoading(false);
-        if (error instanceof AxiosError) {
-          if (error.response) {
-            setErrorMessage(error.response.data.message);
-          } else if (error.request) {
-            setErrorMessage("Отсутствует интернет. Попробуйте позже");
-          } else {
-            setErrorMessage("Неизвестная ошибка");
-          }
+      setIsLoading(false);
+
+      router.push('/auth/signin');
+    }
+    catch (error) {
+      setIsLoading(false);
+      if (error instanceof AxiosError) {
+        if (error.response) {
+          setErrorMessage(error.response.data.message);
+        } else if (error.request) {
+          setErrorMessage("Отсутствует интернет. Попробуйте позже");
+        } else {
+          setErrorMessage("Неизвестная ошибка");
         }
-        // console.log("error: ", error);
       }
-    // .finally(() => {
-    //   setIsLoading(false);
+    }
+  };
 
-    //   router.push('/auth/signin');
-    // })
+  const onRedirect = async (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    e.preventDefault();
+
+    router.push('/auth/signin/');
   };
 
 
   return (
     <>
-      {/* <div className={styles.wrapper}>
-                <div className={styles.containerEnter}>
-                    <div className={styles.modal__block}>
-                        <form className={styles.modal__form}> */}
       <Link href="/music/main">
         <div className={styles.modal__logo}>
           <img src="/img/logo_modal.png" alt="logo" />
@@ -137,10 +122,12 @@ export default function SignUp() {
       >
         Зарегистрироваться
       </button>
-      {/* </form>
-                    </div>
-                </div>
-            </div> */}
+      <button
+        disabled={isLoading}
+        onClick={onRedirect}
+        className={styles.modal__btnEnter}>
+        Войти
+      </button>
     </>
   );
 }
